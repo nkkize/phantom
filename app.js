@@ -26,7 +26,7 @@ app.use("/", router);
 
 router.get('/iframe', (req, res) => {
     res.render('iframe', { title: 'iframe' });
-  });
+});
 
 router.get('/iframe-forms', (req, res) => {
     res.render('iframe-forms', { title: 'iframe' });
@@ -34,7 +34,11 @@ router.get('/iframe-forms', (req, res) => {
 
 router.get('/iframe-modals', (req, res) => {
     res.render('iframe-modals', { title: 'iframe-modals' });
-  });
+});
+
+router.get('/iframe-pointer-lock', (req, res) => {
+    res.render('iframe-pointer-lock', { title: 'iframe-pointer-lock' });
+});
 
 // Listen
 app.listen(4000, function () {
