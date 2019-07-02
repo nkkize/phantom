@@ -1,0 +1,32 @@
+<!-- 
+    document that simply listens for messages from its parent by 
+    hooking into the message event of the window object
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Frame With Form</title>
+</head>
+
+<body>
+
+    <div>
+        <form action="/post-data" method="POST" id="myForm">
+            <div>
+                <input type="number" id="ccn" maxlength="16" placeholder="credit card" required>
+            </div>
+            <div>
+                <input name="expiry" id="expiry" type="month" required />
+            </div>
+            <div>
+                <input type="number" size="3" placeholder="cvv" required>
+            </div>
+            <div>
+                <input type="submit" value="Pay">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

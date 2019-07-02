@@ -1,0 +1,26 @@
+<!-- 
+    document that simply listens for messages from its parent by 
+    hooking into the message event of the window object
+ -->
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>Evalbox's Frame</title>
+   <script>
+       // Whenever the parent executes postMessage on the iframe’s contents,  
+       // this event will trigger, giving us access to the string our parent would like us to execute.
+     window.addEventListener('message', function (e) {
+       var mainWindow = e.source;
+       var result = '';
+       // This call has been wrapped up in a try block, 
+       // as banned operations inside a sandboxed iframe will frequently generate DOM exceptions
+       try {
+         result = eval(e.data);
+       } catch (e) {
+         result = 'eval() threw an exception.' + e;
+       }
+       mainWindow.postMessage(result, event.origin);
+     });
+   </script>
+ </head>
+</html>
