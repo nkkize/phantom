@@ -40,6 +40,10 @@ router.get('/iframe-pointer-lock', (req, res) => {
     res.render('iframe-pointer-lock', { title: 'iframe-pointer-lock' });
 });
 
+router.get('/iframe-xhr', (req, res) => {
+    res.render('iframe-xhr', { title: 'iframe-xhr' });
+});
+
 // Listen
 app.listen(4000, function () {
     console.log("Live at Port 4000");
