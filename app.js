@@ -44,6 +44,10 @@ router.get('/iframe-xhr', (req, res) => {
     res.render('iframe-xhr', { title: 'iframe-xhr' });
 });
 
+router.get('/iframe-popups', (req, res) => {
+    res.render('iframe-popups', { title: 'iframe-popups' });
+});
+
 // Listen
 app.listen(4000, function () {
     console.log("Live at Port 4000");
