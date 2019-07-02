@@ -52,6 +52,10 @@ router.get('/iframe-popups-to-escape-sandbox', (req, res) => {
     res.render('iframe-popups-to-escape-sandbox', { title: 'iframe-popups-to-escape-sandbox' });
 });
 
+router.get('/iframe-same-origin', (req, res) => {
+    res.render('iframe-same-origin', { title: 'iframe-same-origin' });
+});
+
 // Listen
 app.listen(4000, function () {
     console.log("Live at Port 4000");
