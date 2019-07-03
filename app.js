@@ -56,6 +56,10 @@ router.get('/iframe-same-origin', (req, res) => {
     res.render('iframe-same-origin', { title: 'iframe-same-origin' });
 });
 
+router.get('/iframe-top-navigation', (req, res) => {
+    res.render('iframe-top-navigation', { title: 'iframe-top-navigation' });
+});
+
 // Listen
 app.listen(4000, function () {
     console.log("Live at Port 4000");
