@@ -60,6 +60,10 @@ router.get('/iframe-top-navigation', (req, res) => {
     res.render('iframe-top-navigation', { title: 'iframe-top-navigation' });
 });
 
+router.get('/iframe-top-navigation-by-user-activation', (req, res) => {
+    res.render('iframe-top-navigation-by-user-activation', { title: 'iframe-top-navigation-by-user-activation' });
+});
+
 // Listen
 app.listen(4000, function () {
     console.log("Live at Port 4000");
