@@ -1,55 +1,58 @@
+<!doctype html>
 <html>
-
 <head>
-    <title>Iframe Presentation Test</title>
+    <title>Presentation</title>
+</head>
+<body>
+    <h4>Click the below button to start a presentation on external display attached with this device</h4>
+    <p>
+        <button id="start">Start Presentation</button>
+    </p>
+    <p>
+        <input id="message" type="text" placeholder="Enter a message..." list="fruits">
+        <datalist id="fruits">
+            <option value="grapes">
+            <option value="watermelon">
+            <option value="melon">
+            <option value="lemon">
+            <option value="banana">
+            <option value="pineapple">
+            <option value="apple">
+        </datalist>
+        <button id="sendMessage">Send Message</button>
+    </p>
+    
     <script>
-        // The Present button is visible if at least one presentation display is available
-        var presentBtn = document.getElementById("presentBtn");
-        // It is also possible to use relative presentation URL e.g. "presentation.html"
-        var presUrls = ["/presentation"];
-        // show or hide present button depending on display availability
-        var handleAvailabilityChange = function (available) {
-            presentBtn.style.display = available ? "inline" : "none";
-        };
-        // Promise is resolved as soon as the presentation display availability is
-        // known.
-        var request = new PresentationRequest(presUrls);
-        request.getAvailability().then(function (availability) {
-            // availability.value may be kept up-to-date by the controlling UA as long
-            // as the availability object is alive. It is advised for the Web developers
-            // to discard the object as soon as it's not needed.
-            handleAvailabilityChange(availability.value);
-            availability.onchange = function () { handleAvailabilityChange(this.value); };
-        }).catch(function () {
-            // Availability monitoring is not supported by the platform, so discovery of
-            // presentation displays will happen only after request.start() is called.
-            // Pretend the devices are available for simplicity; or, one could implement
-            // a third state for the button.
-            handleAvailabilityChange(true);
+        const presentationRequest = new PresentationRequest(['/presentation']);
+        navigator.presentation.defaultRequest = presentationRequest;
+
+        let presentationConnection;
+
+        document.querySelector('#start').addEventListener('click', function () {
+            console.log('Starting presentation request...');
+            presentationRequest.start()
+                .then(connection => {
+                    console.log('Connected to ' + connection.url);
+                })
+                .catch(error => {
+                    console.log('error: ' + error.message);
+                });
+        });
+
+        presentationRequest.addEventListener('connectionavailable', function (event) {
+            presentationConnection = event.connection;
+            presentationConnection.addEventListener('message', function (event) {
+                console.log('> ' + event.data);
+            });
+        });
+
+        document.querySelector('#sendMessage').addEventListener('click', function () {
+            const message = document.querySelector('#message').value.trim();
+            const lang = document.body.lang || 'en-US';
+
+            console.log('Sending "' + message + '"...');
+            presentationConnection.send(JSON.stringify({ message, lang }));
         });
     </script>
-    <script>
-        presentBtn.onclick = function () {
-            // Start new presentation.
-            request.start()
-                // The connection to the presentation will be passed to setConnection on
-                // success.
-                .then(setConnection);
-            // Otherwise, the user canceled the selection dialog or no screens were
-            // found.
-        };
-    </script>
-    <script>
-        navigator.presentation.defaultRequest = new PresentationRequest(presUrls);
-        navigator.presentation.defaultRequest.onconnectionavailable = function (evt) {
-            setConnection(evt.connection);
-        };
-    </script>
-</head>
-
-<body>
-    <p>Click the below button to test presentaton</p>
-    <button id="presentBtn" style="display: none;">Present</button>
 </body>
-
 </html>
