@@ -1,24 +1,24 @@
 <html>
 
 <head>
-   <title>Screen Orientation Lock Test</title>
+   <title>Screen Orientation Lock</title>
    <script>
-      function ready() {
-         const { type } = screen.orientation;
-         console.log(`Fullscreen and locked to ${type}. Ready!`);
-      }
-
-      async function start() {
-         await document.body.requestFullscreen();
-         await screen.orientation.lock("landscape");
-         ready();
+      function lock(lockButton) {
+         const { type, angle } = screen.orientation;
+         screen.orientation.lock(type)
+         .then(() => {
+            console.log("locked screen in : " + type)
+         })
+         .catch(err => {
+            console.log("locking screen failed due to error: " + err);
+         });
       }
    </script>
 </head>
 
 <body>
-   <h4>Screen Orientation Lock</h4>
-   <button onclick="start()">lock to landscape</button>
+   <p>Click the below button to lock the screen in the current screen orientation</p>
+   <button onclick="lock(this)" id="button">Lock</button>
 </body>
 
 </html>
