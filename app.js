@@ -64,6 +64,10 @@ router.get('/iframe-top-navigation-by-user-activation', (req, res) => {
     res.render('iframe-top-navigation-by-user-activation', { title: 'iframe-top-navigation-by-user-activation' });
 });
 
+router.get('/iframe-orientation-lock', (req, res) => {
+    res.render('iframe-orientation-lock', { title: 'iframe-orientation-lock' });
+});
+
 // Listen
 app.listen(4000, function () {
     console.log("Live at Port 4000");
