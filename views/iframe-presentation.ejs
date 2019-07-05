@@ -1,0 +1,24 @@
+<html>
+
+<head>
+   <title>Iframe Presentation Test</title>
+   <script>
+      function lock(lockButton) {
+         const { type, angle } = screen.orientation;
+         screen.orientation.lock(type)
+         .then(() => {
+            alert("locked screen in : " + type)
+         })
+         .catch(err => {
+            alert("locking screen failed due to error: " + err);
+         });
+      }
+   </script>
+</head>
+
+<body>
+   <p>Click the below button to test presentaton</p>
+   <button onclick="lock(this)" id="button">Lock</button>
+</body>
+
+</html>

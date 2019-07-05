@@ -68,6 +68,10 @@ router.get('/iframe-orientation-lock', (req, res) => {
     res.render('iframe-orientation-lock', { title: 'iframe-orientation-lock' });
 });
 
+router.get('/iframe-presentation', (req, res) => {
+    res.render('iframe-presentation', { title: 'iframe-presentation' });
+});
+
 // Listen
 app.listen(4000, function () {
     console.log("Live at Port 4000");
