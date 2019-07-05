@@ -72,6 +72,10 @@ router.get('/iframe-presentation', (req, res) => {
     res.render('iframe-presentation', { title: 'iframe-presentation' });
 });
 
+router.get('/presentation', (req, res) => {
+    res.render('presentation', { title: 'presentation' });
+});
+
 // Listen
 app.listen(4000, function () {
     console.log("Live at Port 4000");
