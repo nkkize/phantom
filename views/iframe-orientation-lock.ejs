@@ -7,10 +7,10 @@
          const { type, angle } = screen.orientation;
          screen.orientation.lock(type)
          .then(() => {
-            console.log("locked screen in : " + type)
+            alert("locked screen in : " + type)
          })
          .catch(err => {
-            console.log("locking screen failed due to error: " + err);
+            alert("locking screen failed due to error: " + err);
          });
       }
    </script>
